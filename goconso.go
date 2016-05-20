@@ -8,11 +8,8 @@ import (
 	"github.com/tarm/serial"
 	"strconv"
 	"time"
-	"strings"
+	"bytes"
 )
-
-const FIELD_SEPARATOR = "\r\n"
-const ELTS_SEPARATOR = " "
 
 func ReadFrame(r *bufio.Reader) (frame []byte, err error) {
 	const (
@@ -44,6 +41,23 @@ func ExtractNumber(value string) uint32 {
 	return uint32(num)
 }
 
+func sum(a []byte) (res byte) {
+	res = 0
+	for _, c := range a {
+		res += c
+	}
+	return
+}
+
+func ComputeChecksum(name []byte, value []byte) byte {
+	// NOTE: 0x20 == ASCII space char
+	checksum := sum(name) + byte(0x20) + sum(value)
+
+	// Map to a single char E [0x20;0x7F]
+	checksum = (checksum & 0x3F) + 0x20
+	return checksum
+}
+
 func ExtractInfo(fields map[string]string) ConsoInfo {
 
 	return ConsoInfo{
@@ -55,19 +69,33 @@ func ExtractInfo(fields map[string]string) ConsoInfo {
 	}
 }
 
-func DecodeFrame(rawFrame []byte) map[string]string {
-	strFrame := strings.Trim(string(rawFrame), "\r\n")
+func DecodeFrame(rawFrame []byte) (map[string]string, error) {
+	const (
+		CHECKSUM_LENGTH = 1
+	)
+	FIELD_SEPARATOR := []byte("\r\n")
+	ELTS_SEPARATOR := []byte(" ")
 
-	fields := strings.Split(strFrame, FIELD_SEPARATOR)
+	strFrame := bytes.Trim(rawFrame, "\r\n")
+
+	fields := bytes.Split(strFrame, FIELD_SEPARATOR)
 	info := make(map[string]string)
 	for _, field := range fields {
-		elts := strings.SplitN(field, ELTS_SEPARATOR, 3)
+		elts := bytes.SplitN(field, ELTS_SEPARATOR, 3)
 		// TODO: handle incorrect number of fields
-		name, value, _ := elts[0], elts[1], elts[2]
-		// TODO: verify checksum
-		info[name] = value
+		name, value, trail := elts[0], elts[1], elts[2]
+
+		if len(trail) != CHECKSUM_LENGTH {
+			return nil, fmt.Errorf("invalid checksum length (actual: %d, expected: %d)", len(trail), CHECKSUM_LENGTH)
+		}
+		readChecksum := byte(trail[0])
+		computedChecksum := ComputeChecksum(name, value)
+		if readChecksum != computedChecksum {
+			return nil, fmt.Errorf("invalid checksum (field: '%s', value: '%s', read: '%c', expected: '%c'", name, value, readChecksum, computedChecksum)
+		}
+		info[string(name)] = string(value)
 	}
-	return info
+	return info, nil
 }
 
 func main() {
@@ -98,7 +126,11 @@ func main() {
 			fmt.Printf("Error reading frame from '%s' (%s)\n", serialDevice, err)
 			return
 		}
-		fields := DecodeFrame(frame)
+		fields, err := DecodeFrame(frame)
+		if err != nil {
+			fmt.Printf("Error decoding frame: %s", err)
+			continue
+		}
 		info := ExtractInfo(fields)
 		doc, err := json.Marshal(info)
 		fmt.Println(string(doc))

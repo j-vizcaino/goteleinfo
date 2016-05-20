@@ -23,7 +23,9 @@ func TestReadFrame(t *testing.T) {
 }
 
 func TestDecodeFrame(t *testing.T) {
-	RAW_FRAME := []byte("\rPAPP 012345 x\r\nPTEC HP.. u\r\nHCHC 09876543 e\r\nHCHP 1654800 u\n")
+	INVALID_CHECKSUM := []byte("\rHCHC 09876543 e\n")
+	INVALID_CHECKSUM_SIZE := []byte("\rHCHC 09876543 ea\n")
+	RAW_FRAME := []byte("\rPAPP 012345  \r\nPTEC HP..  \r\nHCHC 09876543 @\r\nHCHP 1654800 K\n")
 	EXPECTED_MAP := map[string]string{
 		"PAPP": "012345",
 		"PTEC": "HP..",
@@ -31,6 +33,23 @@ func TestDecodeFrame(t *testing.T) {
 		"HCHP": "1654800",
 	}
 
-	r := DecodeFrame(RAW_FRAME)
-	assert.Equal(t, r, EXPECTED_MAP)
+	r, err := DecodeFrame(INVALID_CHECKSUM)
+	assert.Nil(t, r)
+	assert.Error(t, err)
+
+	r, err = DecodeFrame(INVALID_CHECKSUM_SIZE)
+	assert.Nil(t, r)
+	assert.Error(t, err)
+
+	r, err = DecodeFrame(RAW_FRAME)
+	assert.Nil(t, err)
+	assert.Equal(t, EXPECTED_MAP, r)
+}
+
+func TestComputeChecksum(t *testing.T) {
+	NAME := []byte("PAPP")
+	VALUE := []byte("012345")
+	EXPECTED_CHECKSUM := byte(0x20)
+
+	assert.Equal(t, EXPECTED_CHECKSUM, ComputeChecksum(NAME, VALUE))
 }
