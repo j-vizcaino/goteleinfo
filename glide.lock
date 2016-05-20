@@ -1,0 +1,8 @@
+hash: ec03f9f37e902d48a1d53af005275507503590714b5e234b0418369b2fff1bc7
+updated: 2016-05-20T11:34:18.25621558+02:00
+imports:
+- name: github.com/stretchr/testify
+  version: 6cb3b85ef5a0efef77caef88363ec4d4b5c0976d
+- name: github.com/tarm/serial
+  version: 37be519d49878d0098e34fb614136b81e6c87861
+devImports: []

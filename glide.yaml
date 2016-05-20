@@ -1,0 +1,4 @@
+package: goconso
+import:
+- package: github.com/tarm/serial
+- package: github.com/stretchr/testify
