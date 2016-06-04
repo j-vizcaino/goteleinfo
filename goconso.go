@@ -6,6 +6,7 @@ import (
 	"flag"
 	"bufio"
 	"github.com/tarm/serial"
+	"github.com/golang/glog"
 	"strconv"
 	"time"
 	"bytes"
@@ -114,8 +115,7 @@ func main() {
 
 	port, err := serial.OpenPort(cfg)
 	if err != nil {
-		fmt.Printf("Error opening device '%s' (%s)\n", serialDevice, err)
-		return
+		glog.Exitf("Error opening device '%s' (%s)\n", serialDevice, err)
 	}
 	defer port.Close()
 
@@ -123,12 +123,11 @@ func main() {
 	for {
 		frame, err := ReadFrame(reader)
 		if err != nil {
-			fmt.Printf("Error reading frame from '%s' (%s)\n", serialDevice, err)
-			return
+			glog.Exitf("Error reading frame from '%s' (%s)\n", serialDevice, err)
 		}
 		fields, err := DecodeFrame(frame)
 		if err != nil {
-			fmt.Printf("Error decoding frame: %s", err)
+			glog.Warningf("Error decoding frame: %s. Frame has been dropped.", err)
 			continue
 		}
 		info := ExtractInfo(fields)
