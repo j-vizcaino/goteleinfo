@@ -25,6 +25,7 @@ func TestReadFrame(t *testing.T) {
 func TestDecodeFrame(t *testing.T) {
 	INVALID_CHECKSUM := []byte("\rHCHC 09876543 e\n")
 	INVALID_CHECKSUM_SIZE := []byte("\rHCHC 09876543 ea\n")
+	INVALID_FIELD_COUNT := []byte("\rHCHC 09876543\n")
 	RAW_FRAME := []byte("\rPAPP 012345  \r\nPTEC HP..  \r\nHCHC 09876543 @\r\nHCHP 1654800 K\n")
 	EXPECTED_MAP := map[string]string{
 		"PAPP": "012345",
@@ -38,6 +39,10 @@ func TestDecodeFrame(t *testing.T) {
 	assert.Error(t, err)
 
 	r, err = DecodeFrame(INVALID_CHECKSUM_SIZE)
+	assert.Nil(t, r)
+	assert.Error(t, err)
+
+	r, err = DecodeFrame(INVALID_FIELD_COUNT)
 	assert.Nil(t, r)
 	assert.Error(t, err)
 

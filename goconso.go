@@ -83,7 +83,10 @@ func DecodeFrame(rawFrame []byte) (map[string]string, error) {
 	info := make(map[string]string)
 	for _, field := range fields {
 		elts := bytes.SplitN(field, ELTS_SEPARATOR, 3)
-		// TODO: handle incorrect number of fields
+
+		if len(elts) != 3 {
+			return nil, fmt.Errorf("invalid number of elements for data (data: '%s')", field)
+		}
 		name, value, trail := elts[0], elts[1], elts[2]
 
 		if len(trail) != CHECKSUM_LENGTH {
