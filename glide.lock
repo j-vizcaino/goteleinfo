@@ -1,8 +1,10 @@
-hash: ec03f9f37e902d48a1d53af005275507503590714b5e234b0418369b2fff1bc7
-updated: 2016-05-20T11:34:18.25621558+02:00
+hash: 2f3dcf0680cf8068de6be2595f8414d77166ca1fc32044fd2b7e16f40f161a4d
+updated: 2016-06-04T12:05:13.463629161+02:00
 imports:
+- name: github.com/golang/glog
+  version: 23def4e6c14b4da8ac2ed8007337bc5eb5007998
 - name: github.com/stretchr/testify
-  version: 6cb3b85ef5a0efef77caef88363ec4d4b5c0976d
+  version: 8d64eb7173c7753d6419fd4a9caf057398611364
 - name: github.com/tarm/serial
   version: 37be519d49878d0098e34fb614136b81e6c87861
 devImports: []
