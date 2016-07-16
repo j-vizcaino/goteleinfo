@@ -3,3 +3,7 @@ import:
 - package: github.com/tarm/serial
 - package: github.com/stretchr/testify
 - package: github.com/golang/glog
+- package: github.com/influxdata/influxdb
+  version: ^1.0.0-beta2
+  subpackages:
+  - client/v2

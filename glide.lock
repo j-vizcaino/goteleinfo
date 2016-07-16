@@ -1,10 +1,24 @@
-hash: 2f3dcf0680cf8068de6be2595f8414d77166ca1fc32044fd2b7e16f40f161a4d
-updated: 2016-06-04T12:05:13.463629161+02:00
+hash: 1fde2be27d499285f3d0e49a447a8f977a94fbc455f30f2e1cd40c5158ba5113
+updated: 2016-07-16T14:50:43.174556654+02:00
 imports:
 - name: github.com/golang/glog
   version: 23def4e6c14b4da8ac2ed8007337bc5eb5007998
+- name: github.com/influxdata/influxdb
+  version: bed66cfbe4abf7558594a86f1779c809ffe23b1d
+  subpackages:
+  - client/v2
 - name: github.com/stretchr/testify
   version: 8d64eb7173c7753d6419fd4a9caf057398611364
+  subpackages:
+  - assert
 - name: github.com/tarm/serial
   version: 37be519d49878d0098e34fb614136b81e6c87861
-devImports: []
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 5215b55f46b2b919f50a1df0eaa5886afe4e3b3d
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib
