@@ -1,0 +1,23 @@
+version: '2'
+volumes:
+  influxdb-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+services:
+  influxdb:
+    image: influxdb:0.13-alpine
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+    volumes:
+      - influxdb-data:/var/lib/influxdb
+    restart: always
+
+  grafana:
+    image: grafana/grafana:3.0.4
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/opt/grafana/data
