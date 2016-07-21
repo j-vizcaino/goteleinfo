@@ -1,0 +1,23 @@
+package hphc
+
+import (
+	"encoding/json"
+	"fmt"
+	"goconso/teleinfo"
+)
+
+type JSONExporter struct{}
+
+func NewJSONExporter() teleinfo.Exporter {
+	return &JSONExporter{}
+}
+
+func (x *JSONExporter) ExportFrame(f teleinfo.Frame) error {
+	record := NewRecord(f)
+	doc, err := json.Marshal(record)
+	if err != nil {
+		return err
+	}
+	fmt.Println(string(doc))
+	return nil
+}
