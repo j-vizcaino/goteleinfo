@@ -3,8 +3,13 @@ package hphc
 import (
 	"encoding/json"
 	"fmt"
+	"goconso/exporters"
 	"goconso/teleinfo"
 )
+
+func init() {
+	exporters.Register("hphc.json", NewJSONExporter)
+}
 
 type JSONExporter struct{}
 

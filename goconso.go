@@ -3,7 +3,8 @@ package main
 import (
 	"flag"
 
-	"goconso/exporters/hphc"
+	"goconso/exporters"
+	_ "goconso/exporters/hphc"
 	"goconso/teleinfo"
 
 	"github.com/golang/glog"
@@ -21,7 +22,8 @@ func main() {
 	}
 	defer port.Close()
 	reader := teleinfo.NewReader(port)
-	exporter := hphc.NewJSONExporter()
+	exporterFactory := exporters.FindByName("hphc.json")
+	exporter := exporterFactory()
 
 	for {
 		frame, err := reader.ReadFrame()
