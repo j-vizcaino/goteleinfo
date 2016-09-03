@@ -124,7 +124,7 @@ func injector(clt influxdb.Client, cfg influxdb.BatchPointsConfig, in chan *Reco
 			wh = r.HC
 		}
 		fields := map[string]interface{}{
-			"power_va": uint(r.Power),
+			"power_va": float64(r.Power),
 			"conso_wh": wh,
 		}
 
