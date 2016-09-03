@@ -8,18 +8,18 @@ import (
 )
 
 func init() {
-	exporters.Register("hphc.json", NewJSONExporter)
+	exporters.Register("hphc.json", newJSONExporter)
 }
 
-type JSONExporter struct{}
+type jsonExporter struct{}
 
-func NewJSONExporter() teleinfo.Exporter {
-	return &JSONExporter{}
+func newJSONExporter() teleinfo.Exporter {
+	return &jsonExporter{}
 }
 
-func (x *JSONExporter) ExportFrame(f teleinfo.Frame) error {
-	record := NewRecord(f)
-	doc, err := json.Marshal(record)
+func (x *jsonExporter) ExportFrame(f teleinfo.Frame) error {
+	rec := newRecord(f)
+	doc, err := json.Marshal(rec)
 	if err != nil {
 		return err
 	}

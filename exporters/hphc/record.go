@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type Record struct {
+type record struct {
 	Timestamp time.Time
 	PAPP_va   uint32
 	HC_wh     uint32
@@ -19,8 +19,8 @@ func extractNumber(value string) uint32 {
 	return uint32(num)
 }
 
-func NewRecord(f teleinfo.Frame) *Record {
-	return &Record{
+func newRecord(f teleinfo.Frame) *record {
+	return &record{
 		Timestamp: time.Now(),
 		PAPP_va:   extractNumber(f["PAPP"]),
 		HC_wh:     extractNumber(f["HCHC"]),
