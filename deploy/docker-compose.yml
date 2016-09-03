@@ -16,8 +16,10 @@ services:
     restart: always
 
   grafana:
-    image: grafana/grafana:3.0.4
+    image: grafana/grafana:3.1.1
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
     ports:
       - "3000:3000"
     volumes:
-      - grafana-data:/opt/grafana/data
+      - grafana-data:/var/lib/grafana
