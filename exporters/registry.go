@@ -4,7 +4,7 @@ import (
 	"goconso/teleinfo"
 )
 
-type Factory func() teleinfo.Exporter
+type Factory func() (teleinfo.Exporter, error)
 
 var registry map[string]Factory
 

@@ -19,12 +19,12 @@ func (b *barExporter) ExportFrame(teleinfo.Frame) error {
 }
 
 func TestRegister(t *testing.T) {
-	fooFactory := func() teleinfo.Exporter {
-		return nil
+	fooFactory := func() (teleinfo.Exporter, error) {
+		return nil, nil
 	}
 	barResult := &barExporter{}
-	barFactory := func() teleinfo.Exporter {
-		return barResult
+	barFactory := func() (teleinfo.Exporter, error) {
+		return barResult, nil
 	}
 
 	Register("foo", fooFactory)
@@ -39,11 +39,15 @@ func TestRegister(t *testing.T) {
 	//       Call factory function and compare result instead.
 	foo := FindByName("foo")
 	assert.NotNil(t, foo)
-	assert.Nil(t, foo())
+	res, err := foo()
+	assert.Nil(t, res)
+	assert.Nil(t, err)
 
 	bar := FindByName("bar")
 	assert.NotNil(t, bar)
-	assert.Equal(t, barResult, bar())
+	res, err = bar()
+	assert.Equal(t, barResult, res)
+	assert.Nil(t, err)
 
 	assert.Nil(t, FindByName("missing"))
 }

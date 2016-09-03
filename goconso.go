@@ -22,8 +22,11 @@ func main() {
 	}
 	defer port.Close()
 	reader := teleinfo.NewReader(port)
-	exporterFactory := exporters.FindByName("hphc.json")
-	exporter := exporterFactory()
+	newExporter := exporters.FindByName("hphc.json")
+	exporter, err := newExporter()
+	if err != nil {
+		glog.Exitf("Error creating exporter 'hphc.json' (%s)\n", err)
+	}
 
 	for {
 		frame, err := reader.ReadFrame()

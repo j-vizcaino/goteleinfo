@@ -13,8 +13,8 @@ func init() {
 
 type jsonExporter struct{}
 
-func newJSONExporter() teleinfo.Exporter {
-	return &jsonExporter{}
+func newJSONExporter() (teleinfo.Exporter, error) {
+	return &jsonExporter{}, nil
 }
 
 func (x *jsonExporter) ExportFrame(f teleinfo.Frame) error {
