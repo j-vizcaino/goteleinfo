@@ -6,16 +6,16 @@ CREATE RETENTION POLICY "temporary" ON "conso" DURATION 1h REPLICATION 1;
 
 CREATE CONTINUOUS QUERY cq_hp ON conso BEGIN
     SELECT mean(power_va) AS power_va,
-           max(abs_hp_wh)-min(abs_hp_wh) AS conso_wh
+           max(abs_conso_wh)-min(abs_conso_wh) AS conso_wh
     INTO conso."default".hp
-    FROM temporary.hp_raw
+    FROM conso."temporary".hp_raw
     GROUP BY time(1m)
 END;
 
 CREATE CONTINUOUS QUERY cq_hc ON conso BEGIN
     SELECT mean(power_va) AS power_va,
-           max(abs_hc_wh)-min(abs_hc_wh) AS conso_wh
+           max(abs_conso_wh)-min(abs_conso_wh) AS conso_wh
     INTO conso."default".hc
-    FROM temporary.hc_raw
+    FROM conso."temporary".hc_raw
     GROUP BY time(1m)
 END;
