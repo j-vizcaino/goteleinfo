@@ -1,0 +1,20 @@
+language: go
+
+go:
+- 1.6.3
+- 1.7
+
+go_import_path: goteleinfo
+
+env:
+- GLIDE_VERSION=v0.12.1
+
+install:
+- mkdir -p $HOME/bin
+- export PATH="$HOME/bin:$PATH"
+- wget -O- "https://github.com/Masterminds/glide/releases/download/${GLIDE_VERSION}/glide-${GLIDE_VERSION}-linux-amd64.tar.gz" | tar -vxz -C $HOME/bin --strip=1
+- glide install
+
+script:
+- make
+- make test
