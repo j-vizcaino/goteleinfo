@@ -1,0 +1,21 @@
+CREATE DATABASE $DBNAME;
+
+DROP RETENTION POLICY "default" ON "$DBNAME";
+CREATE RETENTION POLICY "default" ON "$DBNAME" DURATION 0d REPLICATION 1 DEFAULT;
+CREATE RETENTION POLICY "expire" ON "$DBNAME" DURATION 1h REPLICATION 1;
+
+CREATE CONTINUOUS QUERY cq_hp ON $DBNAME BEGIN
+    SELECT mean(power_va) AS power_va,
+           max(abs_conso_wh)-min(abs_conso_wh) AS conso_wh
+    INTO $DBNAME."default".hp
+    FROM $DBNAME."expire".hp_raw
+    GROUP BY time(1m)
+END;
+
+CREATE CONTINUOUS QUERY cq_hc ON $DBNAME BEGIN
+    SELECT mean(power_va) AS power_va,
+           max(abs_conso_wh)-min(abs_conso_wh) AS conso_wh
+    INTO $DBNAME."default".hc
+    FROM $DBNAME."expire".hc_raw
+    GROUP BY time(1m)
+END;
