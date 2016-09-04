@@ -1,4 +1,8 @@
 package: goteleinfo
+owners:
+- name: Jérôme Vizcaino
+  email: jerome.vizcaino@gmail.com
+license: GPL-3.0
 import:
 - package: github.com/tarm/serial
 - package: github.com/golang/glog
