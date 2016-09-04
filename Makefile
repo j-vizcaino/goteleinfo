@@ -10,7 +10,7 @@ goconso: $(SRC)
 	go build goconso
 
 test: $(SRC_TESTS)
-	for d in $(TEST_DIRS); do cd $$d; echo "*** Running tests in $$d..."; go test -v; cd - > /dev/null; done
+	go test -v $(TEST_DIRS)
 
 clean:
 	rm -f goconso
