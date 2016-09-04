@@ -1,7 +1,7 @@
 package hphc
 
 import (
-	"goconso/teleinfo"
+	"goteleinfo/teleinfo"
 	"strconv"
 	"time"
 )

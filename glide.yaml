@@ -1,4 +1,4 @@
-package: goconso
+package: goteleinfo
 import:
 - package: github.com/tarm/serial
 - package: github.com/stretchr/testify

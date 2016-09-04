@@ -1,7 +1,7 @@
 package hphc
 
 import (
-	"goconso/teleinfo"
+	"goteleinfo/teleinfo"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

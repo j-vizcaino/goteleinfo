@@ -1,7 +1,7 @@
 package exporters
 
 import (
-	"goconso/teleinfo"
+	"goteleinfo/teleinfo"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	"goconso/exporters"
-	_ "goconso/exporters/hphc"
-	"goconso/teleinfo"
+	"goteleinfo/exporters"
+	_ "goteleinfo/exporters/hphc"
+	"goteleinfo/teleinfo"
 
 	"github.com/golang/glog"
 )

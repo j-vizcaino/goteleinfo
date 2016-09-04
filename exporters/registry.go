@@ -1,7 +1,7 @@
 package exporters
 
 import (
-	"goconso/teleinfo"
+	"goteleinfo/teleinfo"
 )
 
 type Factory func() (teleinfo.Exporter, error)

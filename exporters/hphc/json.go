@@ -3,8 +3,8 @@ package hphc
 import (
 	"encoding/json"
 	"fmt"
-	"goconso/exporters"
-	"goconso/teleinfo"
+	"goteleinfo/exporters"
+	"goteleinfo/teleinfo"
 )
 
 func init() {

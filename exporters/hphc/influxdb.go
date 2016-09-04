@@ -3,8 +3,8 @@ package hphc
 import (
 	"flag"
 	"fmt"
-	"goconso/exporters"
-	"goconso/teleinfo"
+	"goteleinfo/exporters"
+	"goteleinfo/teleinfo"
 	"os"
 	"time"
 
@@ -17,7 +17,7 @@ const (
 
 var (
 	dbURL       = *flag.String(exporterName+".url", getEnvDefault("INFLUXDB_URL", "http://localhost:8086"), "URL to connect to InfluxDB. Can be set from env var 'INFLUXDB_URL'")
-	dbName      = *flag.String(exporterName+".name", getEnvDefault("INFLUXDB_NAME", "goconso"), "Name of the target InfluxDB database. Can be set from env var 'INFLUXDB_NAME'.")
+	dbName      = *flag.String(exporterName+".name", getEnvDefault("INFLUXDB_NAME", "teleinfo"), "Name of the target InfluxDB database. Can be set from env var 'INFLUXDB_NAME'.")
 	dbUser      = *flag.String(exporterName+".user", os.Getenv("INFLUXDB_USER"), "Username for InfluxDB authentication. Can be set from env var 'INFLUXDB_USER'.")
 	dbPass      = *flag.String(exporterName+".pass", os.Getenv("INFLUXDB_PASS"), "Password for InfluxDB authentication. Can be set from env var 'INFLUXDB_PASS'.")
 	dbRetention = *flag.String(exporterName+".retpolicy", getEnvDefault("INFLUXDB_RETPOLICY", "default"), "InfluxDB retention policy target name. Can be set from env var 'INFLUXDB_RETPOLICY'.")
