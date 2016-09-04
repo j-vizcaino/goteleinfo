@@ -7,13 +7,13 @@ imports:
   version: bed66cfbe4abf7558594a86f1779c809ffe23b1d
   subpackages:
   - client/v2
+- name: github.com/tarm/serial
+  version: 37be519d49878d0098e34fb614136b81e6c87861
+testImports:
 - name: github.com/stretchr/testify
   version: 8d64eb7173c7753d6419fd4a9caf057398611364
   subpackages:
   - assert
-- name: github.com/tarm/serial
-  version: 37be519d49878d0098e34fb614136b81e6c87861
-testImports:
 - name: github.com/davecgh/go-spew
   version: 5215b55f46b2b919f50a1df0eaa5886afe4e3b3d
   subpackages:
