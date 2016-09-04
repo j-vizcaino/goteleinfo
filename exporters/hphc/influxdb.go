@@ -80,8 +80,8 @@ func convertRecord(r *record) map[string]interface{} {
 		wh = r.HC_wh
 	}
 	fields := map[string]interface{}{
-		"power_va":     r.PAPP_va,
-		"abs_conso_wh": wh,
+		"power_va":   r.PAPP_va,
+		"counter_wh": wh,
 	}
 	return fields
 }

@@ -6,7 +6,7 @@ CREATE RETENTION POLICY "expire" ON "$DBNAME" DURATION 1h REPLICATION 1;
 
 CREATE CONTINUOUS QUERY cq_hp ON $DBNAME BEGIN
     SELECT mean(power_va) AS power_va,
-           max(abs_conso_wh)-min(abs_conso_wh) AS conso_wh
+           max(counter_wh)-min(counter_wh) AS counter_wh
     INTO $DBNAME."default".hp
     FROM $DBNAME."expire".hp_raw
     GROUP BY time(1m)
@@ -14,7 +14,7 @@ END;
 
 CREATE CONTINUOUS QUERY cq_hc ON $DBNAME BEGIN
     SELECT mean(power_va) AS power_va,
-           max(abs_conso_wh)-min(abs_conso_wh) AS conso_wh
+           max(counter_wh)-min(counter_wh) AS counter_wh
     INTO $DBNAME."default".hc
     FROM $DBNAME."expire".hc_raw
     GROUP BY time(1m)
