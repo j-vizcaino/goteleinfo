@@ -21,7 +21,7 @@ In order to convert read the frames, the [Micro Teleinfo](https://www.tindie.com
 * `hphc.json`: extract *Heures pleines*, *Heures creuses* counters, instant power consumption and print as JSON on stdout
 * `hphc.influx`: extract *Heures pleines*, *Heures creuses* counters, instant power consumption and insert into an InfluxDB database
 
-NOTE: an InfluxDB database schema for the `hphc.influx` is available in the `deploy` subdirectory. Use `new-database.sh` to generate the schema with a custom database name.
+NOTE: an InfluxDB database schema for the `hphc.influx` exporter is available in the `deploy` subdirectory. Use `new-database.sh` to generate the schema with a custom database name.
 
 
 ## Installation
