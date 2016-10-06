@@ -15,9 +15,12 @@ goteleinfo: $(SRC)
 test: $(SRC_TESTS)
 	go test -v $(TEST_DIRS)
 
+arm: $(SRC)
+	env GOOS=linux GOARCH=arm go build goteleinfo
+	@mv goteleinfo goteleinfo.arm
+
 clean:
 	rm -f goteleinfo
 
 .PHONY: all clean test
 
-	
