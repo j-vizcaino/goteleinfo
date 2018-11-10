@@ -20,7 +20,7 @@ func TestFrame(t *testing.T) {
 		"IMAX":     "036",
 	}
 
-	assert.Equal(t,"HC..", f.Type())
+	assert.Equal(t, "HC..", f.Type())
 
 	s, ok := f.GetStringField("PTEC")
 	assert.True(t, ok)

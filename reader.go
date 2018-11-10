@@ -24,7 +24,6 @@ func NewReader(r io.Reader) Reader {
 	}
 }
 
-
 func readRawFrame(buffer *bufio.Reader) ([]byte, error) {
 	const (
 		FrameStart byte = 0x2
