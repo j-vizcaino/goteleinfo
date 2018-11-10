@@ -42,12 +42,13 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:0742194df19fa541f729033baa048826b5161d6fcbea6ab46da1c6aeb09c3e63"
+  digest = "1:f3b66d8cde3e7dd84ab59cae3ea405c73e2fc51ea1a7ed745e178beae4d23f28"
   name = "github.com/prometheus/client_golang"
   packages = [
     "prometheus",
     "prometheus/internal",
     "prometheus/promauto",
+    "prometheus/promhttp",
   ]
   pruneopts = "UT"
   revision = "abad2d1bd44235a26707c172eab6bca5bf2dbad3"
@@ -116,6 +117,7 @@
   input-imports = [
     "github.com/prometheus/client_golang/prometheus",
     "github.com/prometheus/client_golang/prometheus/promauto",
+    "github.com/prometheus/client_golang/prometheus/promhttp",
     "github.com/stretchr/testify/assert",
     "github.com/tarm/serial",
   ]
