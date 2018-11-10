@@ -26,17 +26,17 @@ func TestFrame(t *testing.T) {
 	assert.True(t, ok)
 	assert.Equal(t, "HP..", s)
 
-	s, ok = f.GetStringField("missing")
+	_, ok = f.GetStringField("missing")
 	assert.False(t, ok)
 
 	num, ok := f.GetUIntField("IMAX")
 	assert.True(t, ok)
 	assert.Equal(t, uint(36), num)
 
-	num, ok = f.GetUIntField("missing")
+	_, ok = f.GetUIntField("missing")
 	assert.False(t, ok)
 
-	num, ok = f.GetUIntField("OPTARIF")
+	_, ok = f.GetUIntField("OPTARIF")
 	assert.False(t, ok)
 }
 
