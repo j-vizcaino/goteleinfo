@@ -1,6 +1,13 @@
 # goteleinfo: monitor your house electrical current
 
-[![Build Status](https://travis-ci.org/j-vizcaino/goteleinfo.svg)](https://travis-ci.org/j-vizcaino/goteleinfo) [![GoDoc](https://godoc.org/github.com/j-vizcaino/goteleinfo?status.png)](https://godoc.org/github.com/j-vizcaino/goteleinfo) [![GoReport](https://goreportcard.com/badge/github.com/j-vizcaino/goteleinfo)](https://goreportcard.com/report/github.com/j-vizcaino/goteleinfo)
+[![Build badge]][Build] [![GoDoc badge]][GoDoc] [![GoReport badge]][GoReport]
+
+[Build badge]: https://travis-ci.org/j-vizcaino/goteleinfo.svg
+[Build]: https://travis-ci.org/j-vizcaino/goteleinfo
+[GoDoc badge]: https://godoc.org/github.com/j-vizcaino/goteleinfo?status.png
+[GoDoc]: https://godoc.org/github.com/j-vizcaino/goteleinfo
+[GoReport badge]: https://goreportcard.com/badge/github.com/j-vizcaino/goteleinfo
+[GoReport]: https://goreportcard.com/report/github.com/j-vizcaino/goteleinfo
 
 `goteleinfo` is a small library capable of decoding Teleinfo frames sent by an electrical meter.
 
@@ -14,7 +21,7 @@ In order to convert read the frames, the [Micro Teleinfo](https://www.tindie.com
 
 ## Example: JSON frames
 
-A simple CLI is provided in `cmd/teleinfo-info` that reads frames and prints them, JSON encoded.
+A simple CLI is provided in [`cmd/teleinfo-info`](https://github.com/j-vizcaino/goteleinfo/blob/master/cmd/teleinfo-json/main.go) that reads frames and prints them, JSON encoded.
 This program can serve as an example of what the library provides.
 
 ## Metrics
