@@ -6,9 +6,13 @@ import (
 	"strconv"
 )
 
+// Frame holds a single Teleinfo frame.
 type Frame interface {
+	// Type returns the type of frame (see `OPTARIF` field)
 	Type() string
+	// GetStringField returns the value of a field as a string.
 	GetStringField(string) (string, bool)
+	// GetUIntField returns type value of a field as an unsigned integer.
 	GetUIntField(string) (uint, bool)
 }
 
