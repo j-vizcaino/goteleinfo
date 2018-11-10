@@ -1,6 +1,6 @@
 # goteleinfo: monitor your house electrical current
 
-[![Build Status](https://travis-ci.org/j-vizcaino/goteleinfo.svg)](https://travis-ci.org/j-vizcaino/goteleinfo)
+[![Build Status](https://travis-ci.org/j-vizcaino/goteleinfo.svg)](https://travis-ci.org/j-vizcaino/goteleinfo) [![GoDoc](https://godoc.org/github.com/j-vizcaino/goteleinfo?status.png)](https://godoc.org/github.com/j-vizcaino/goteleinfo) [![GoReport](https://goreportcard.com/badge/github.com/j-vizcaino/goteleinfo)](https://goreportcard.com/report/github.com/j-vizcaino/goteleinfo)
 
 `goteleinfo` is a small library capable of decoding Teleinfo frames sent by an electrical meter.
 
