@@ -25,6 +25,7 @@ func main() {
 		frame, err := reader.ReadFrame()
 		if err != nil {
 			fmt.Printf("Error reading frame from '%s' (%s)\n", serialDevice, err)
+			continue
 		}
 		doc, _ := json.Marshal(frame)
 		fmt.Println(string(doc))
