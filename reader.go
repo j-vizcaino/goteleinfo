@@ -24,6 +24,9 @@ func NewReader(r io.Reader) Reader {
 	}
 }
 
+// NOTE: as per https://golang.org/pkg/bufio/#pkg-constants the bufio.Reader will never consider more than
+// 64kB of data to find the given delimiter. This saves us from running into a loop where invalid data gets
+// read from the serial port, but no valid frame start/end are encountered.
 func readRawFrame(buffer *bufio.Reader) ([]byte, error) {
 	const (
 		FrameStart byte = 0x2
@@ -31,7 +34,6 @@ func readRawFrame(buffer *bufio.Reader) ([]byte, error) {
 	)
 	var frame []byte
 	var err error
-	// TODO: check for overflow
 	// TODO: check for interrupted frame marker
 	if _, err = buffer.ReadSlice(FrameStart); err != nil {
 		incrementErrorCounter(frameReadErrorCounter, "no_frame_start_marker")

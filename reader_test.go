@@ -40,3 +40,24 @@ func TestReadFrame(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, DecodedFrame, frame)
 }
+
+func TestReadFrameNoStart(t *testing.T) {
+	invalidData := []byte("qwertyuiop")
+	reader := NewReader(bytes.NewReader(invalidData))
+
+	_, err := reader.ReadFrame()
+	assert.Error(t, err)
+}
+
+func TestReadFrameNoEnd(t *testing.T) {
+	invalidData := make([]byte, 0, bufio.MaxScanTokenSize + 1)
+	// Set frame start
+	invalidData = append(invalidData, byte(0x2))
+	for i := 1; i < cap(invalidData); i++ {
+		invalidData = append(invalidData, byte(i % 255))
+	}
+
+	reader := NewReader(bytes.NewReader(invalidData))
+	_, err := reader.ReadFrame()
+	assert.Error(t, err)
+}
