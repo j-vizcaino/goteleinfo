@@ -1,10 +1,10 @@
 package main
 
 import (
-	"flag"
-	"github.com/j-vizcaino/goteleinfo"
-	"fmt"
 	"encoding/json"
+	"flag"
+	"fmt"
+	"github.com/j-vizcaino/goteleinfo"
 )
 
 func main() {
