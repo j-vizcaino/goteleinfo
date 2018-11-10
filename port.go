@@ -4,6 +4,7 @@ import (
 	"github.com/tarm/serial"
 )
 
+// OpenPort opens and configures the serial port to read Teleinfo frames from.
 func OpenPort(serialDevice string) (*serial.Port, error) {
 	cfg := &serial.Config{
 		Name:     serialDevice,
