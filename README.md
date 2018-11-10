@@ -12,7 +12,23 @@ The Teleinfo protocol is described [in this document](https://www.enedis.fr/site
 
 In order to convert read the frames, the [Micro Teleinfo](https://www.tindie.com/products/Hallard/micro-teleinfo-v11/) or [PiTinfo](https://www.tindie.com/products/Hallard/pitinfo/) is needed.
 
-## JSON frames
+## Example: JSON frames
 
 A simple CLI is provided in `cmd/teleinfo-info` that reads frames and prints them, JSON encoded.
 This program can serve as an example of what the library provides.
+
+## Metrics
+
+The library provides counters to track frame reading and decoding errors. Those are stored internally as Prometheus metrics.
+
+* `teleinfo_frames_read_total`: total number of raw Teleinfo frames read successfully.
+* `teleinfo_frames_read_errors_total`: total number of read errors. This metric is tagged by `error_type`.
+* `teleinfo_frames_decoded_total`: total number of decoded Teleinfo frames.
+* `teleinfo_frames_decode_errors_total`: total number of frame decoding errors. This is metric is tagged by `error_type`
+
+### Difference between reading and decoding
+
+Bytes coming from the serial port are accumulated by the reader, looking for _frame start_ and _frame end_ markers to extract raw Teleinfo frames.
+This is called "reading".
+
+Decoding refers to verifying checksum and extracting fields from frame (eg. `OPTARIF`, `HPHC` fields, etc...).

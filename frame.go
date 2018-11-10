@@ -52,20 +52,24 @@ func decodeFrame(rawFrame []byte) (Frame, error) {
 		elts := bytes.SplitN(field, eltSeparator, 3)
 
 		if len(elts) != 3 {
+			incrementErrorCounter(frameDecodeErrorCounter, "invalid_field")
 			return nil, fmt.Errorf("error decoding frame, invalid number of elements for data (data: '%s')", field)
 		}
 		name, value, trail := elts[0], elts[1], elts[2]
 
 		if len(trail) != checksumLength {
+			incrementErrorCounter(frameDecodeErrorCounter, "invalid_checksum_length")
 			return nil, fmt.Errorf("error decoding frame, invalid checksum length (actual: %d, expected: %d)", len(trail), checksumLength)
 		}
 		readChecksum := byte(trail[0])
 		expectedChecksum := computeChecksum(name, value)
 		if readChecksum != expectedChecksum {
+			incrementErrorCounter(frameDecodeErrorCounter, "checksum_error")
 			return nil, fmt.Errorf("error decoding frame, invalid checksum (field: '%s', value: '%s', read: '%c', expected: '%c'", name, value, readChecksum, expectedChecksum)
 		}
 		info[string(name)] = string(value)
 	}
+	frameDecodedCounter.Inc()
 	return info, nil
 }
 
