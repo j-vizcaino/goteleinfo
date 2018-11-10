@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/j-vizcaino/goteleinfo"
+	"os"
 )
 
 func main() {
@@ -16,7 +17,7 @@ func main() {
 	port, err := teleinfo.OpenPort(serialDevice)
 	if err != nil {
 		fmt.Println(err)
-		return
+		os.Exit(1)
 	}
 	defer port.Close()
 	reader := teleinfo.NewReader(port)
