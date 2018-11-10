@@ -50,11 +50,11 @@ func TestReadFrameNoStart(t *testing.T) {
 }
 
 func TestReadFrameNoEnd(t *testing.T) {
-	invalidData := make([]byte, 0, bufio.MaxScanTokenSize + 1)
+	invalidData := make([]byte, 0, bufio.MaxScanTokenSize+1)
 	// Set frame start
 	invalidData = append(invalidData, byte(0x2))
 	for i := 1; i < cap(invalidData); i++ {
-		invalidData = append(invalidData, byte(i % 255))
+		invalidData = append(invalidData, byte(i%255))
 	}
 
 	reader := NewReader(bytes.NewReader(invalidData))
