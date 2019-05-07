@@ -37,6 +37,6 @@ Decoding refers to verifying checksum and extracting fields from frame (eg. `OPT
 
 ## Example: serving Teleinfo as JSON frames
 
-A simple HTTP server example is provided in [`cmd/teleinfo-info`](https://github.com/j-vizcaino/goteleinfo/blob/master/cmd/teleinfo-json/main.go) that provides the last *n* frames, JSON encoded.
+A simple HTTP server example is provided in [`cmd/teleinfo-json`](https://github.com/j-vizcaino/goteleinfo/blob/master/cmd/teleinfo-json/main.go) that provides the last *n* frames, JSON encoded.
 Frames are served in `/frames`, while Prometheus metrics can be read from `/metrics` URL.
 
