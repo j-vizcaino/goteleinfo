@@ -14,3 +14,5 @@ require (
 	github.com/tarm/serial v0.0.0-20180114052751-eaafced92e96
 	golang.org/x/sys v0.0.0-20180715085529-ac767d655b30
 )
+
+go 1.13

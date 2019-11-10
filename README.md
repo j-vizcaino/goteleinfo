@@ -19,6 +19,10 @@ The Teleinfo protocol is described [in this document](https://www.enedis.fr/site
 
 In order to convert read the frames, the [Micro Teleinfo](https://www.tindie.com/products/Hallard/micro-teleinfo-v11/) or [PiTinfo](https://www.tindie.com/products/Hallard/pitinfo/) is needed.
 
+## Requirements
+
+This library requires Go >= 1.13
+
 ## Metrics
 
 The library provides counters to track frame reading and decoding errors. Those are stored internally as Prometheus metrics.

@@ -3,6 +3,8 @@ package teleinfo
 import (
 	"bufio"
 	"bytes"
+	"errors"
+	"io"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -60,4 +62,12 @@ func TestReadFrameNoEnd(t *testing.T) {
 	reader := NewReader(bytes.NewReader(invalidData))
 	_, err := reader.ReadFrame()
 	assert.Error(t, err)
+}
+
+func TestReadFrameEOF(t *testing.T) {
+	reader := NewReader(bytes.NewReader(nil))
+
+	_, err := reader.ReadFrame()
+	assert.Error(t, err)
+	assert.True(t, errors.Is(err, io.EOF))
 }

@@ -37,11 +37,11 @@ func readRawFrame(buffer *bufio.Reader) ([]byte, error) {
 	// TODO: check for interrupted frame marker
 	if _, err = buffer.ReadSlice(FrameStart); err != nil {
 		incrementErrorCounter(frameReadErrorCounter, "no_frame_start_marker")
-		return nil, fmt.Errorf("error looking for start of frame marker (%s)", err)
+		return nil, fmt.Errorf("error looking for start of frame marker: %w", err)
 	}
 	if frame, err = buffer.ReadBytes(FrameEnd); err != nil {
 		incrementErrorCounter(frameReadErrorCounter, "no_frame_end_marker")
-		return nil, fmt.Errorf("error looking for end of frame marker (%s)", err)
+		return nil, fmt.Errorf("error looking for end of frame marker: %w", err)
 	}
 
 	if len(frame) == 0 {
