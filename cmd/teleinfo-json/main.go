@@ -5,11 +5,12 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/j-vizcaino/goteleinfo"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"net/http"
 	"os"
 	"sync"
+
+	teleinfo "github.com/j-vizcaino/goteleinfo"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func readFrames(reader teleinfo.Reader, framesChan chan<- teleinfo.Frame) {
@@ -25,15 +26,22 @@ func readFrames(reader teleinfo.Reader, framesChan chan<- teleinfo.Frame) {
 
 func main() {
 	var serialDevice string
+	var mode string
 	var listenAddress string
 	var framesCount int
 
 	flag.StringVar(&serialDevice, "device", "/dev/ttyUSB0", "Serial port to read frames from")
+	flag.StringVar(&mode, "mode", "historic", "Teleinfo mode standard or historic")
 	flag.StringVar(&listenAddress, "listen-address", "localhost:9000", "HTTP service listen address")
 	flag.IntVar(&framesCount, "frames-count", 20, "Number of Teleinfo frames to serve under /frames")
 	flag.Parse()
 
-	port, err := teleinfo.OpenPort(serialDevice)
+	if mode != "historic" && mode != "standard" {
+		flag.PrintDefaults()
+		os.Exit(1)
+	}
+
+	port, err := teleinfo.OpenPort(serialDevice, mode)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -45,7 +53,7 @@ func main() {
 	mutex := &sync.Mutex{}
 
 	// Read Teleinfo frames and send them into framesChan
-	go readFrames(teleinfo.NewReader(port), framesChan)
+	go readFrames(teleinfo.NewReader(port, &mode), framesChan)
 
 	// Enqueue teleinfo.Frame into a fixed-length ring buffer
 	go func() {
