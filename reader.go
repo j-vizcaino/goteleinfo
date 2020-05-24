@@ -14,13 +14,15 @@ type Reader interface {
 
 type reader struct {
 	buffer *bufio.Reader
+	mode   *string
 }
 
 // NewReader create a Teleinfo frame reader from a simple Reader.
 // r is usually the struct returned by OpenPort().
-func NewReader(r io.Reader) Reader {
+func NewReader(r io.Reader, mode *string) Reader {
 	return &reader{
 		buffer: bufio.NewReader(r),
+		mode:   mode,
 	}
 }
 
@@ -58,5 +60,8 @@ func (t *reader) ReadFrame() (Frame, error) {
 	if err != nil {
 		return nil, err
 	}
-	return decodeFrame(rawFrame)
+	if t.mode != nil && *t.mode == "standard" {
+		return decodeStandardFrame(rawFrame)
+	}
+	return decodeHistoricFrame(rawFrame)
 }
