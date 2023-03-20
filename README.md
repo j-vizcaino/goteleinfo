@@ -1,6 +1,6 @@
 # goteleinfo: monitor your house electrical current
 
-[![Build badge]][Build] [![GoDoc badge]][GoDoc] [![GoReport badge]][GoReport]
+![Build badge] [![GoDoc badge]][GoDoc] [![GoReport badge]][GoReport]
 
 [Build badge]: https://github.com/j-vizcaino/goteleinfo/actions/workflows/go.yml/badge.svg
 [Build]: https://travis-ci.org/j-vizcaino/goteleinfo
@@ -15,7 +15,7 @@ Teleinfo is the protocol used by ERDF (*Electricité Réseau Distribution France
 protocol, the electrical meter sends status frames periodically (~2 per second) that gives
 information about your electrical current consumption and status.
 
-The Teleinfo protocol is described [in this document](https://www.enedis.fr/sites/default/files/Enedis-NOI-CPT_02E.pdf)
+The Teleinfo protocol is described [in this document](https://www.enedis.fr/media/2035/download)
 
 In order to convert read the frames, the [Micro Teleinfo](https://www.tindie.com/products/Hallard/micro-teleinfo-v11/) or [PiTinfo](https://www.tindie.com/products/Hallard/pitinfo/) is needed.
 
