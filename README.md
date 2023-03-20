@@ -2,7 +2,7 @@
 
 [![Build badge]][Build] [![GoDoc badge]][GoDoc] [![GoReport badge]][GoReport]
 
-[Build badge]: https://travis-ci.org/j-vizcaino/goteleinfo.svg
+[Build badge]: https://github.com/j-vizcaino/goteleinfo/actions/workflows/go.yml/badge.svg
 [Build]: https://travis-ci.org/j-vizcaino/goteleinfo
 [GoDoc badge]: https://godoc.org/github.com/j-vizcaino/goteleinfo?status.png
 [GoDoc]: https://godoc.org/github.com/j-vizcaino/goteleinfo
@@ -21,7 +21,7 @@ In order to convert read the frames, the [Micro Teleinfo](https://www.tindie.com
 
 ## Requirements
 
-This library requires Go >= 1.13
+This library requires Go >= 1.16
 
 ## Metrics
 
@@ -41,6 +41,6 @@ Decoding refers to verifying checksum and extracting fields from frame (eg. `OPT
 
 ## Example: serving Teleinfo as JSON frames
 
-A simple HTTP server example is provided in [`cmd/teleinfo-json`](https://github.com/j-vizcaino/goteleinfo/blob/master/cmd/teleinfo-json/main.go) that provides the last *n* frames, JSON encoded.
+A simple HTTP server example is provided in [`cmd/teleinfo-json`](https://github.com/j-vizcaino/goteleinfo/blob/master/cmd/teleinfo-json/main.go) that serves the last *n* frames, JSON encoded.
 Frames are served in `/frames`, while Prometheus metrics can be read from `/metrics` URL.
 
