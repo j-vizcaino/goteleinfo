@@ -2,7 +2,7 @@
 
 [![Build badge]][Build] [![GoDoc badge]][GoDoc] [![GoReport badge]][GoReport]
 
-[Build badge]: https://travis-ci.org/j-vizcaino/goteleinfo.svg
+[Build badge]: https://github.com/j-vizcaino/goteleinfo/actions/workflows/go.yml/badge.svg
 [Build]: https://travis-ci.org/j-vizcaino/goteleinfo
 [GoDoc badge]: https://godoc.org/github.com/j-vizcaino/goteleinfo?status.png
 [GoDoc]: https://godoc.org/github.com/j-vizcaino/goteleinfo
