@@ -1,6 +1,6 @@
 # goteleinfo: monitor your house electrical current
 
-[![Build badge]][Build] [![GoDoc badge]][GoDoc] [![GoReport badge]][GoReport]
+![Build badge] [![GoDoc badge]][GoDoc] [![GoReport badge]][GoReport]
 
 [Build badge]: https://github.com/j-vizcaino/goteleinfo/actions/workflows/go.yml/badge.svg
 [Build]: https://travis-ci.org/j-vizcaino/goteleinfo
