@@ -16,6 +16,8 @@ type Frame interface {
 	GetStringField(string) (string, bool)
 	// GetUIntField returns type value of a field as an unsigned integer.
 	GetUIntField(string) (uint, bool)
+	// GetMap returns the raw map object
+	GetMap() map[string]string
 }
 
 type frame map[string]string
@@ -44,6 +46,10 @@ func (f frame) GetUIntField(name string) (uint, bool) {
 	num, err := strconv.ParseUint(s, 10, 32)
 	ok = err == nil
 	return uint(num), ok
+}
+
+func (f frame) GetMap() map[string]string {
+	return f
 }
 
 // NOTES:
