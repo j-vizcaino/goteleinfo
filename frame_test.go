@@ -24,6 +24,20 @@ func TestHistoricFrame(t *testing.T) {
 	assert.Equal(t, "HC..", f.Type())
 	assert.Equal(t, "historic", f.Mode())
 
+	assert.Equal(t, map[string]string{
+		"PAPP":     "00340",
+		"HHPHC":    "D",
+		"ADCO":     "031028217014",
+		"OPTARIF":  "HC..",
+		"PTEC":     "HP..",
+		"IINST":    "001",
+		"MOTDETAT": "000000",
+		"ISOUSC":   "45",
+		"HCHC":     "016771964",
+		"HCHP":     "020267321",
+		"IMAX":     "036",
+	}, f.GetMap())
+
 	s, ok := f.GetStringField("PTEC")
 	assert.True(t, ok)
 	assert.Equal(t, "HP..", s)
